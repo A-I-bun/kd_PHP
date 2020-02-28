@@ -1,0 +1,66 @@
+body {
+  margin-left:50px;
+  margin-right: 50px;
+}
+
+textarea {
+  border-style: solid;
+}
+
+input {
+  border-style: solid;
+  margin-top: 5px;
+}
+
+.msg {
+  margin-top: 30px;
+}
+
+.msg p {
+  font-size: 10px;
+}
+
+.msg a {
+  font-size: 10px;
+}
+
+.paging {
+  display: flex;
+}
+
+.paging li {
+  margin: 20px;
+}
+
+li {
+  list-style:none;
+}
+
+.re_del_flex{
+  display: flex;
+}
+
+.reply{
+  padding-top: 5px;
+}
+
+p.day {
+  margin: 5px 5px 0px;
+}
+
+.delete {
+  padding-top: 5px;
+}
+
+.favorite a {
+  text-decoration: none;
+  font-size: 10px;
+}
+
+.f_yes {
+  color:orange;
+}
+
+.f_no {
+  color:gray;
+}
