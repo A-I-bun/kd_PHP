@@ -48,9 +48,9 @@ $posts=$db->prepare
 ('SELECT a.post_id,p.message,p.member_id,m.name AS m_name,rm.reacted_member_id,rm.name AS r_name,m.picture,min.minCreated,fc.favCnt,rc.rtCnt 
 FROM posts p
 LEFT JOIN members m ON p.member_id=m.id
--- ↓"SELECT p.id,p.created from posts p UNION SELECT r.post_id,r.created FROM retweets r"のビュー
+-- ↓"SELECT p.id,p.created from posts p UNION SELECT r.post_id,r.created FROM retweets r"(投稿者本人の投稿・RTを全部縦に連結用)のビュー
 LEFT JOIN allCreated a ON p.id=a.post_id
--- ↓postidごとの投稿者本人が投稿した日付表示をRTにも適用させる用
+-- ↓postidごとの、投稿者本人が投稿した日付表示をRT分に適用させる用
 LEFT JOIN (SELECT a.post_id,MIN(a.created) AS minCreated FROM allCreated a GROUP BY a.post_id) AS min ON p.id=min.post_id
 -- ↓RT者の名前表示用
 LEFT JOIN (SELECT m.name,r.reacted_member_id,r.created FROM members m JOIN retweets r ON m.id=r.reacted_member_id) AS rm ON a.created=rm.created
@@ -134,12 +134,16 @@ foreach($posts as $post):
 <div class="msg">
 <!-- 画像＆投稿内容&リプ -->
 <?php
+if(isset($post['reacted_member_id'])):
 if($_SESSION['id']===$post['reacted_member_id']):
 ?>
   <p>リツイート済み</p>
 <?php else: ?>
   <p>&#x21B9;<?php echo h($post['r_name']);?>  さんがリツイート</p>
-<?php endif; ?>
+<?php 
+endif;
+endif;
+?>
 
   <img src="member_picture/<?php echo h($post['picture']);?>" width="48" height="50" alt="<?php echo h($post['m_name']); ?>">
   <p><?php echo makeLink(h($post['message'])); ?>
