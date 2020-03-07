@@ -10,13 +10,12 @@ if(isset($_SESSION['id'])&&($_GET['id'])) {
 
 // ファボID＆ファボした人の組み合わせの重複確認
   $favDuplicates=$db->prepare
-  ('SELECT post_id,reacted_member_id,COUNT(1) AS duplicate FROM favorites f WHERE post_id=? AND reacted_member_id=?');
+  ('SELECT post_id,reacted_member_id,COUNT(post_id) AS duplicate FROM favorites WHERE post_id=? AND reacted_member_id=?');
   $favDuplicates->execute(array(
     $_GET['id'],
     $_SESSION['id']
   ));
   $favDup=$favDuplicates->fetch();
-  var_dump($favDup);
   
     if((int)$favDup['duplicate']>0) {
       //duplicateが0じゃないなら既にファボってるのでテーブルから削除
@@ -37,8 +36,9 @@ if(isset($_SESSION['id'])&&($_GET['id'])) {
       ));
     
     }
-
-    header('Location:index.php');
+    
+    header("Location:".$_SERVER['HTTP_REFERER']);
+    // header("Location:{$_SERVER['HTTP_REFERER']}");
     exit();
 }
 ?>
