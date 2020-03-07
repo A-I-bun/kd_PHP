@@ -1,7 +1,12 @@
 body {
-  margin-left:50px;
-  margin-right: 50px;
+  width: 980px;
+  margin: 30px auto;
 }
+
+.logout {
+  text-align:right;
+}
+
 
 textarea {
   border-style: solid;
@@ -10,6 +15,7 @@ textarea {
 input {
   border-style: solid;
   margin-top: 5px;
+  font-size: 14px;
 }
 
 .msg {
@@ -25,11 +31,18 @@ input {
 }
 
 .paging {
-  display: flex;
+  font-size: 12px;
 }
 
 .paging li {
-  margin: 20px;
+  float: left;
+  margin: 25px;
+}
+
+.page_crearfix::after{
+  content:"";
+  display: block;
+  clear: both;
 }
 
 li {
@@ -50,6 +63,25 @@ p.day {
 
 .delete {
   padding-top: 5px;
+  color:#F33;
+}
+
+.rt_fav {
+  display: flex;
+}
+
+.retweet a{
+  text-decoration: none;
+  font-size: 10px;
+  margin-right: 30px;
+}
+
+.r_yes {
+  color: green;
+}
+
+.r_no {
+  color:gray;
 }
 
 .favorite a {
